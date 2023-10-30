@@ -6,10 +6,13 @@
 # Tested on and works with Ubuntu 20.04
 ###############################################
 
-# Create the directory logs if not yet there
-if [ ! -d "$HOME/logs" ]; then
-    mkdir "$HOME/logs"
-fi
+# Get a list of all user directories
+user_directories=$(ls /home)
+
+# Create a logs folder in each user directory
+for directory in $user_directories; do
+    mkdir -p "/home/$directory/logs"
+done
 
 # remove the lines if already appended
 grep -v "Automatically" /etc/bash.bashrc > tmpfile && mv tmpfile /etc/bash.bashrc
